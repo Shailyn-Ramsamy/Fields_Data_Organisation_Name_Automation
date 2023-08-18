@@ -37,7 +37,7 @@ def find_match(row):
         score2 = fuzz.ratio(first_column_value, second_column_value)
         score3 = fuzz.partial_ratio(first_column_value, second_column_value)
 
-        # Check if the score is above a certain threshold (e.g. 85)
+        # Check if the score is above a certain threshold
         if score >= 93 or score2 >= 93 and score > max_score and score2 > max_score:
             # If so, store the value of the second column
             max_score = score
@@ -60,10 +60,8 @@ df2 = pd.read_excel(r"FD_Orgs.xlsx")
 
 unique_org_names = set(df2.iloc[:, 0])
 
-# Convert first column of df to string
 df['Input'] = df['Input'].astype(str)
 
-# Create boolean mask for non-empty cells in first column
 mask = df.iloc[:, 0].notnull()
 
 # Create a list to store the matches
@@ -73,16 +71,13 @@ matches = []
 uncertain = set()
 uncertain_2 = set()
 
-# Use ThreadPoolExecutor to parallelize the matching process
 with ThreadPoolExecutor() as executor:
     results = executor.map(find_match, df[mask].to_dict('records'))
     matches = list(results)
 
-# Add the list of matches to the dataframe as a new column
 df['Matches'] = matches
 
 # this highlights cells yellow in the dataframe
 styled_df = df.style.applymap(highlight_cells)
 
-# Displays the output dataframe
 display(styled_df)
