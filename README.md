@@ -20,7 +20,7 @@ Run the script using your preferred Python interpreter.
 
 2. Read the input Excel files: It reads the "Input.xlsx" and "FD_Orgs.xlsx" files using the pandas library.
 
-3. Matching Logic: The script matches values from the "Input" column of the "Input.xlsx" file against a set of unique organization names from the "FD_Orgs.xlsx" file. The matching logic is based on fuzzy string comparison methods provided by the thefuzz library.
+* 3. Matching Logic: The script matches values from the "Input" column of the "Input.xlsx" file against a set of unique organization names from the "FD_Orgs.xlsx" file. The matching logic is based on fuzzy string comparison methods provided by the thefuzz library.
   * If a match is found with high confidence (similarity score greater than or equal to 93), the script assigns the matched organization name to the "Matches" column of the DataFrame.
   * For cases where the similarity score is in a certain range (77 to 92) and additional conditions are met, the script considers the match as uncertain and stores these values in the uncertain and uncertain_2 sets.
   * A special case handling logic is also applied, where if a certain similarity score threshold is met, the script assigns a predefined organization name.
